@@ -1,0 +1,31 @@
+{
+  "name": "react-app-food",
+  "version": "1.0.0",
+  "description": "this is my project",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/safeercsfr/foodvilla.git"
+  },
+  "author": "safeer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/safeercsfr/foodvilla/issues"
+  },
+  "homepage": "https://github.com/safeercsfr/foodvilla#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "browserslist": "^4.21.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
