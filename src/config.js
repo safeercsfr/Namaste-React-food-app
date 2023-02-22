@@ -1,38 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 
-// this is react element this is an object
-const Title = () => (
-  <a href="/">
-    <img
-      className="logo"
-      src="https://i.pinimg.com/originals/26/9a/93/269a93f45452b15422d7d52dd96a1881.jpg"
-      alt="logo"
-    />
-  </a>
-);
+// SWIGGY API
+export const SWIGGY_API ="https://www.swiggy.com/dapi/restaurants/list/v5?lat=9.943811700000001&lng=76.3275467&page_type=DESKTOP_WEB_LISTING"
+// Image CDN URL for Restaurant card
+export const IMG_CDN_URL =
+  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
 
-//this is react component this is function
-// component composition or composing component
-const Header = () => {
-  return (
-    <div className="header">
-      <Title />
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
+  // Swiggy API to get Restaurant Menu data
+export const FETCH_MENU_URL =
+"https://www.swiggy.com/dapi/menu/v4/full?lat=9.943811700000001&lng=76.3275467&menuId=";
 
 // config driven UI
 // RestaurantList is JSON Data for displaying cards
-const restaurantList = [
+export const restaurantList = [
   {
     type: "restaurant",
     data: {
@@ -1849,60 +1828,3 @@ const restaurantList = [
     subtype: "basic",
   },
 ];
-const burgerKing ={
-  name:"Burger King",
-  image:"https://imgv3.fotor.com/images/blog-cover-image/part-blurry-image.jpg",
-  cusines:["Burger","American"],
-  rating:"3.4"
-}
-
-const RestaurantCards = ({cloudinaryImageId,name,cuisines,totalRatingsString}) =>{
-  return (
-  <div className="card">
-    <img src={"https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/"
-    +cloudinaryImageId} alt="cardImage" />
-    <h2>{name}</h2>
-    <h3>{cuisines.join(",")}</h3>
-    <h4>{totalRatingsString} stars</h4>
-  </div>
-  )
-}
-
-const Body = () =>{
-    return(
-        <>
-        <div className="resList">
-        {
-          restaurantList.map((res)=>{
-            return <RestaurantCards {...res.data} key={res.data.id}/>
-          })
-        }
-        </div>
-        </>
-    )
-}
-
-const Footer = () =>{
-    return(
-        <>
-        <h1>footer</h1>
-        </>
-    )
-}
-
-const AppLayout = () =>{
-    return(
-        <>
-        <Header/>
-        <Body/>
-        <Footer/>
-        </>
-    )
-}
-
-// create root using createRoot
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// passing react element inside root
-root.render(<AppLayout />);
- 
