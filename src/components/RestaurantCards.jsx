@@ -7,11 +7,11 @@ const RestaurantCards = ({
   totalRatingsString,
 }) => {
   return (
-    <div className="card">
+    <div className="w-[267px] p-3 bg-gray-200 m-6 ml-3 rounded-md h-[17rem] justify-center">
       <img src={IMG_CDN_URL + cloudinaryImageId} alt="cardImage" />
-      <h2>{name}</h2>
-      <h3>{cuisines.join(",")}</h3>
-      <h4>{totalRatingsString} stars</h4>
+      <h2 className="text-lg font-bold whitespace-normal">{name}</h2>
+      <h3 className="truncate ">{cuisines.join(",")}</h3>
+      <h4 className="whitespace-normal">{totalRatingsString} stars</h4>
     </div>
   );
 };

@@ -12,18 +12,21 @@ const RestaurantMenu = () => {
   ) : (
     <>
     <div className="menu">
-      <div> 
-        <h1>{restaurant?.name}</h1>
-        <img src={IMG_CDN_URL + restaurant?.cloudinaryImageId} alt="image" />
-        <h3>{restaurant?.city}</h3>
-        <h3>{restaurant?.city}</h3>
-        <h3>{restaurant?.avgRatingString} stars</h3>
-        <h3>{restaurant?.costForTwoMsg}</h3>
+      <div className="bg-gray-300 flex flex-col p-8"> 
+      <div className="flex">
+        <img className="h-52" src={IMG_CDN_URL + restaurant?.cloudinaryImageId} alt="image" />
+        <h1 className="font-bold text-4xl ml-6">{restaurant?.name}</h1>
+        <div className="mr-auto">
+        <h3 className="mt-14 font-bold">{restaurant?.city}</h3>
+        <h3 className="font-bold">{restaurant?.avgRatingString} stars</h3>
+        <h3 className="font-bold">{restaurant?.costForTwoMsg}</h3>
+        </div>
+      </div>
       </div>
       <div>
-        <h1>Menu</h1>
+        <h1 className="font-extrabold text-2xl flex flex-wrap">Menu</h1>
         <h1>{console.log(Object.values(restaurant?.menu?.items))}</h1>
-        <ul>
+        <ul className="list-disc" >
           {Object.values(restaurant?.menu?.items).map((item) => (
             <li key={item?.id}>{item?.name}</li>
           ))}
