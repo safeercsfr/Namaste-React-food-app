@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import UserContext from "../utils/UserContext";
 
 // this is react element this is an object
 const Title = () => (
@@ -16,24 +17,49 @@ const Title = () => (
 //this is react component this is function
 // component composition or composing component
 const Header = () => {
+  const { user } = useContext(UserContext);
   const [isLogged, setIsLogged] = useState(false);
+  const cartItem = useSelector(store => store.cart.items);
+  console.log('j',cartItem);
   return (
-    <div className="flex justify-between bg-purple-900 shadow-lg">
+    <div className="flex sticky top-0 justify-between bg-purple-900 shadow-lg">
       <Title />
       <div>
         <ul className="flex py-9">
-          <li className="px-4 font-bold text-white"><Link to="/">Home</Link></li>
-          <li className="px-4 font-bold text-white"><Link to="/about">About</Link></li>
-          <li className="px-4 font-bold text-white"><Link to="/contact">Contact</Link></li>
-          <li className="px-4 font-bold text-white"><Link to="/instamart">Cart</Link></li>
+          <li className="px-4 font-bold text-white">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="px-4 font-bold text-white">
+            <Link to="/about">About</Link>
+          </li>
+          <li className="px-4 font-bold text-white">
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li className="px-4 font-bold text-white">
+            <Link to="/cart">Cart <span className="px-1 m-2 bg-yellow-300 rounded-md text-black">{cartItem.length}</span> </Link>
+          </li>
+          <li className="px-4 font-bold text-white">
+            <Link to="/instamart">Instamart</Link>
+          </li>
         </ul>
       </div>
       <div>
-      {isLogged ? (
-        <button className="rounded-md p-2 mt-7 mr-10 w-24 bg-white" onClick={() => setIsLogged(false)}>Logout</button>
-      ) : (
-        <button className="rounded-md p-2 mt-7 mr-10 w-24 bg-white" onClick={() => setIsLogged(true)}>Login</button>
-      )}
+        <h1 className="font-bold text-2xl bg-red-700">{user.name}</h1>
+        {isLogged ? (
+          <button
+            className="rounded-md p-2 mt-7 mr-10 w-24 bg-white"
+            onClick={() => setIsLogged(false)}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="rounded-md p-2 mt-7 mr-10 w-24 bg-white"
+            onClick={() => setIsLogged(true)}
+          >
+            Login
+          </button>
+        )}
       </div>
     </div>
   );

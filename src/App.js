@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -11,6 +11,10 @@ import Error from "./components/Error";
 import Profile from "./components/ClassProfile";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
+import Cart from "./components/Cart";
+import store from "./utils/store";
+import { Provider } from "react-redux";
 // import Profile from "./components/Profile";
 
 // chunking
@@ -24,11 +28,19 @@ const InstaMart = lazy(() => import("./components/InstaMart"));
 // Upon on demand loading -> upon render -> suspend loading
 
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "safeer",
+    email: "safeer@gmal.com",
+  });
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+    <Provider store={store}>
+      <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
+      </Provider>
     </>
   );
 };
@@ -62,9 +74,13 @@ const appRoute = createBrowserRouter([
         element: <RestaurantMenu />,
       },
       {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
         path: "/instamart",
         element: (
-          <Suspense fallback={<Shimmer/>}>
+          <Suspense fallback={<Shimmer />}>
             <InstaMart />
           </Suspense>
         ),
@@ -76,7 +92,7 @@ const appRoute = createBrowserRouter([
     element: <Login />,
     errorElement: <Error />,
   },
-]); 
+]);
 
 // create root using createRoot
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -1,16 +1,18 @@
 import { SWIGGY_API } from "../config";
 import RestaurantCards from "./RestaurantCards";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
-import {Link} from "react-router-dom"
-import {filterData} from '../utils/helper'
+import { Link } from "react-router-dom";
+import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // let searchText = "KFC";
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   // empty dependency array => once after render
   // dep array [searchText] => once after initial render + every time after render (my searchText changes)
@@ -26,9 +28,9 @@ const Body = () => {
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
-  
-  const isOnline = useOnline()
-  if(!isOnline) return <h1>No Internet Connection❗</h1>
+
+  const isOnline = useOnline();
+  if (!isOnline) return <h1>No Internet Connection❗</h1>;
 
   // if allRestaurants is empty don't render restaurants cards
   if (!allRestaurants) return null;
@@ -55,10 +57,30 @@ const Body = () => {
         >
           Search
         </button>
+        <input
+          className="border border-blue-500"
+          onChange={(e) => setUser({
+            ...user,
+            name:e.target.value,
+          })}
+          value={user.name}
+        />
+        <input
+          className="border border-blue-500"
+          onChange={(e) => setUser({
+            ...user,
+            email:e.target.value,
+          })}
+          value={user.email}
+        />
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((res) => {
-          return <Link to={"/restaurant/"+res.data.id} key={res.data.id} ><RestaurantCards {...res.data} /></Link>
+          return (
+            <Link to={"/restaurant/" + res.data.id} key={res.data.id}>
+              <RestaurantCards {...res.data} />
+            </Link>
+          );
         })}
       </div>
     </>
