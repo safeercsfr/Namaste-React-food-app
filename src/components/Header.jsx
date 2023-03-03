@@ -7,6 +7,7 @@ import UserContext from "../utils/UserContext";
 const Title = () => (
   <a href="/">
     <img
+      data-testid="logo"
       className="h-24 p-2"
       src="https://i.pinimg.com/originals/26/9a/93/269a93f45452b15422d7d52dd96a1881.jpg"
       alt="logo"
@@ -36,7 +37,7 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
           </li>
           <li className="px-4 font-bold text-white">
-            <Link to="/cart">Cart <span className="px-1 m-2 bg-yellow-300 rounded-md text-black">{cartItem.length}</span> </Link>
+            <Link to="/cart">Cart <span className="px-1 m-2 bg-yellow-300 rounded-md text-black" data-testid="cart">{cartItem.length}</span> </Link>
           </li>
           <li className="px-4 font-bold text-white">
             <Link to="/instamart">Instamart</Link>
